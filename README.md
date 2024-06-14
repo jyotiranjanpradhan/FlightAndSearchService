@@ -6,7 +6,7 @@
 -Create your .env file  and addign Following Variabels 
    - "PORT-Your free Port"
 
--create `config/configj.json` on  root and add this code
+-create `config/config.json` on  root and add this code
    ```
 {
   "development": {
@@ -19,5 +19,6 @@
 }
    ```
 
-   
+-once you have added your db config as listed  above , go to src folder from your terminal and execute 'npx sequilize db:create'
+
      
