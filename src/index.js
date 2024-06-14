@@ -12,7 +12,7 @@ const setupAndStartServer = async () => {
         console.log(`${PORT} started`);
         
     });
-};
+};  
 
 setupAndStartServer();
 
