@@ -6,7 +6,7 @@
 -Create your .env file  and addign Following Variabels 
    - "PORT-Your free Port"
 
--create `config/config.json` on  root and add this code
+-just run `npx sequilize init` on outside of src it automatically create config,migration ,models,seeders folder and  bring  all these into src
    ```
 {
   "development": {
@@ -19,6 +19,7 @@
 }
    ```
 
--once you have added your db config as listed  above , go to src folder from your terminal and execute 'npx sequilize db:create'
+-once you have added your db config as listed  above , go to src folder from your terminal and execute `npx sequelize db:create`
 
-     
+
+## flight
