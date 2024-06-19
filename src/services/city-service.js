@@ -15,8 +15,8 @@ class CityService {
 
   async deleteCity() {
     try {
-      const response = await this.CityRepository.DeleteCity(cityid);
-      return response;
+      await this.CityRepository.DeleteCity(cityid);
+      return true;
     } catch (error) {
       console.log("Error in Service Layer");
       console.log(error);
@@ -24,7 +24,8 @@ class CityService {
   }
   async updateCity() {
     try {
-      const response = await this.CityRepository.UpdateCity({ cityid, names });
+      await this.CityRepository.UpdateCity({ cityid, names });
+      return true;
     } catch (error) {
       console.log("Error in Service Layer");
       console.log(error);
@@ -40,3 +41,5 @@ class CityService {
     }
   }
 }
+
+module.exports = CityService;
