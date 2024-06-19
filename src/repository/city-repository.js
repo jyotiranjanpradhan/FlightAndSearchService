@@ -4,9 +4,9 @@ const { city } = require("../models"); // Ensure correct path
 
 class CityRepository {
   //Create City
-  async createCity({ name }) {
+  async createCity({ names }) {
     try {
-      const createdCity = await city.create({ name });
+      const createdCity = await city.create({ names });
       return createdCity;
     } catch (error) {
       console.log(error.name);
@@ -27,9 +27,9 @@ class CityRepository {
   }
 
   //Update City
-  async UpdateCity({cityid, name}) {
+  async UpdateCity({cityid, names}) {
     try {
-      const cityname = await city.update({name:name}, {
+      const cityname = await city.update({name:names}, {
         where: {
           id: cityid,
         },
