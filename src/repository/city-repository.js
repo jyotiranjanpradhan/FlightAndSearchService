@@ -1,55 +1,64 @@
-// src/repository/city-repository.js
-const { where } = require("sequelize");
-const { city } = require("../models"); // Ensure correct path
+const { City } = require("../models/index"); // Ensure the correct path and model name
 
 class CityRepository {
-  //Create City
-  async createCity({ names }) {
+  // Create City
+  async createCity( name ) {
     try {
-      const createdCity = await city.create({ names });
+      const createdCity = await City.create( name );
       return createdCity;
     } catch (error) {
-      console.log(error.name);
+      console.error("Error in createCity:", error);
+      throw error;
     }
   }
 
-  //Delete City
-  async DeleteCity(cityid) {
+  // Delete City
+  async deleteCity(cityId) {
     try {
-      await city.destroy({
+      await City.destroy({
         where: {
-          id: cityid,
+          id: cityId,
         },
       });
+      return true;
     } catch (error) {
-      console.log(error);
+      console.error("Error in deleteCity:", error);
+      throw error;
     }
   }
 
-  //Update City
-  async UpdateCity({cityid, names}) {
+  // Update City
+  async updateCity({ cityid, name }) {
     try {
-      const cityname = await city.update({name:names}, {
-        where: {
-          id: cityid,
-        },
-      });
-      return cityname;
-    } catch (error) {
-      console.log(error.name);
-    }
-  }
-
-  //Get City
-  async GetCity({cityid}) {
-    try {
-      const cityname=await city.findByPk(cityid);
+      const city = await City.update(
+        { name },
+        {
+          where: {
+            id: cityid,
+          },
+        }
+      );
       return city;
     } catch (error) {
-      console.log("some Error in Getting city ");
-      console.log(error.name);
+      console.error("Error in updateCity:", error);
+      throw error;
     }
   }
+
+  // Get City
+  async getCity(cityId) {
+    try {
+      const city = await City.findByPk(cityId);
+      if (!city) {
+        throw new Error(`City with id ${cityId} not found`);
+      }
+      return city;
+    } catch (error) {
+      console.error("Error in getCity:", error.message || error);
+      throw error;
+    }
+  }
+  
 }
 
 module.exports = CityRepository;

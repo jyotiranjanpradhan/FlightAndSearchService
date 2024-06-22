@@ -1,47 +1,48 @@
-const { CityRepository } = require("../repository/index"); // this file contain all the repository file as object just destructure it and use  repository
+const { CityRepository } = require("../repository/index"); // Ensure correct path
 
 class CityService {
-  //i use constructor here for Learning perpose but we can also use without constrctor :->"const cityrepo=new CityRepository();" Then use cityrepo as object and use function of  CityRepository;
-    
+  // Using a constructor for learning purposes, but it can also be done without it by directly creating an instance of CityRepository
   constructor() {
-    
-    this.CityRepository = new CityRepository();
+    this.cityRepository = new CityRepository();
   }
-  async createCity(data) {
+
+  async createCity({ name }) {
     try {
-      const city = await this.CityRepository.createCity(data);
+      const city = await this.cityRepository.createCity({ name });
       return city;
     } catch (error) {
-      console.log("Error in Service Layer createCity");
-      console.log(error);
+      console.error("Error in Service Layer createCity:", error);
+      throw error; // Rethrow error to handle it at a higher level
     }
   }
 
-  async deleteCity(cityid) {
+  async deleteCity(cityId) {
     try {
-      await this.CityRepository.DeleteCity(cityid);
-      return true;
+      const deleted = await this.cityRepository.deleteCity(cityId);
+      return deleted;
     } catch (error) {
-      console.log("Error in Service Layer deleteCity");
-      console.log(error);
+      console.error("Error in Service Layer deleteCity:", error);
+      throw error; // Rethrow error to handle it at a higher level
     }
   }
-  async updateCity({ cityid, names }) {
+
+  async updateCity({ cityid, name }) {
     try {
-      await this.CityRepository.UpdateCity({ cityid, names });
-      return true;
+      const updated = await this.cityRepository.updateCity({cityid, name});
+      return updated;
     } catch (error) {
-      console.log("Error in Service Layer updateCity");
-      console.log(error);
+      console.error("Error in Service Layer updateCity:", error);
+      throw error; // Rethrow error to handle it at a higher level
     }
   }
+
   async getCity(cityid) {
     try {
-      const response = this.CityRepository.GetCity(cityid);
-      return response;
+      const city = await this.cityRepository.getCity(cityid);
+      return city;
     } catch (error) {
-      console.log("Error in Service Layer getCity");
-      console.log(error);
+      console.error("Error in Service Layer getCity:", error);
+      throw error; // Rethrow error to handle it at a higher level
     }
   }
 }
