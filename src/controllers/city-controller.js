@@ -6,7 +6,7 @@ const cityService = new CityService();
 const create = async (req, res) => {
   try {
     const city = await cityService.createCity({ name: req.body.name });
-    console.log(req.body.name );
+    console.log(req.body.name);
     return res.status(201).json({
       data: city,
       success: true,
@@ -47,9 +47,9 @@ const destroy = async (req, res) => {
 
 // GET -> /city/:cityid as query params
 const get = async (req, res) => {
-  try { 
+  try {
     const response = await cityService.getCity(req.params.cityid);
-   
+
     return res.status(200).json({
       data: response,
       message: "Successfully Retrieved Data",
@@ -89,33 +89,32 @@ const update = async (req, res) => {
       success: false,
     });
   }
-}
-  const getcities=async(req,res)=>{
-    try {
-      const response=await cityService.getcities();
-      return res.status(200).json({
-        data: response,
-        success: true,
-        err: {},
-        message: "Fetch City  Successfully",
-      });
-      
-    } catch (error) {
-      console.error("Error in controller update:", error);
+};
+const getcities = async (req, res) => {
+  try {
+    console.log(req.query.name);
+    const response = await cityService.getcities(req.query);
+    return res.status(200).json({
+      data: response,
+      success: true,
+      err: {},
+      message: "Fetch City  Successfully",
+    });
+  } catch (error) {
+    console.error("Error in controller update:", error);
     return res.status(500).json({
       data: {},
       message: "Some error is there",
       err: error,
       success: false,
     });
-    }
   }
-
+};
 
 module.exports = {
   create,
   destroy,
   get,
   update,
-  getcities
+  getcities,
 };

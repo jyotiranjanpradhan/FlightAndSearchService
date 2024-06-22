@@ -1,10 +1,11 @@
+const { where } = require("sequelize");
 const { City } = require("../models/index"); // Ensure the correct path and model name
-
+const { Op } = require("sequelize");
 class CityRepository {
   // Create City
-  async createCity( name ) {
+  async createCity(name) {
     try {
-      const createdCity = await City.create( name );
+      const createdCity = await City.create(name);
       return createdCity;
     } catch (error) {
       console.error("Error in createCity:", error);
@@ -58,8 +59,18 @@ class CityRepository {
       throw error;
     }
   }
-  async getcities(){
+  async getcities(filter) {
     try {
+      if (filter.name) {
+        const cities = await City.findAll({
+          where: {
+            name: {
+              [Op.startsWith]: filter.name,
+            },
+          },
+        });
+        return cities;
+      }
       const cities = await City.findAll();
       return cities;
     } catch (error) {
@@ -67,7 +78,6 @@ class CityRepository {
       throw error;
     }
   }
-  
 }
 
 module.exports = CityRepository;

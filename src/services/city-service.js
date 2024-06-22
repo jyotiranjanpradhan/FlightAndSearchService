@@ -28,7 +28,7 @@ class CityService {
 
   async updateCity({ cityid, name }) {
     try {
-      const updated = await this.cityRepository.updateCity({cityid, name});
+      const updated = await this.cityRepository.updateCity({ cityid, name });
       return updated;
     } catch (error) {
       console.error("Error in Service Layer updateCity:", error);
@@ -45,14 +45,13 @@ class CityService {
       throw error; // Rethrow error to handle it at a higher level
     }
   }
-  async getcities(){
+  async getcities(filter) {
     try {
-      const cities=await this.cityRepository.getcities();
+      const cities = await this.cityRepository.getcities(filter);
       return cities;
     } catch (error) {
       console.error("Error in Service Layer getCities:", error);
       throw error;
-      
     }
   }
 }
