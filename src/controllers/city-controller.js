@@ -89,11 +89,33 @@ const update = async (req, res) => {
       success: false,
     });
   }
-};
+}
+  const getcities=async(req,res)=>{
+    try {
+      const response=await cityService.getcities();
+      return res.status(200).json({
+        data: response,
+        success: true,
+        err: {},
+        message: "Fetch City  Successfully",
+      });
+      
+    } catch (error) {
+      console.error("Error in controller update:", error);
+    return res.status(500).json({
+      data: {},
+      message: "Some error is there",
+      err: error,
+      success: false,
+    });
+    }
+  }
+
 
 module.exports = {
   create,
   destroy,
   get,
   update,
+  getcities
 };

@@ -58,6 +58,15 @@ class CityRepository {
       throw error;
     }
   }
+  async getcities(){
+    try {
+      const cities = await City.findAll();
+      return cities;
+    } catch (error) {
+      console.error("Error in getCities:", error.message || error);
+      throw error;
+    }
+  }
   
 }
 
